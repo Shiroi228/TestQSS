@@ -1,7 +1,7 @@
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-
+#include <QLabel>
 
 #include "mainwindow.hpp"
 #include "tabwidget.hpp"
@@ -9,8 +9,17 @@
 TabWidget::TabWidget(QWidget *parent) {
     setObjectName("TabWidget");
 
-    addTab(new QWidget(this), QString(tr("File")));
-    addTab(new QWidget(this), QString(tr("Main")));
-    addTab(new QWidget(this), QString(tr("View")));
-    addTab(new QWidget(this), QString(tr("Geometry")));
+    QLabel *label1 = new QLabel("QLabel_1", this);
+    QLabel *label2 = new QLabel("QLabel_2", this);
+    QLabel *label3 = new QLabel("QLabel_3", this);
+    QLabel *label4 = new QLabel("QLabel_4", this);
+
+    label1->setObjectName("label1");
+
+    addTab(label1, QString(tr("File")));
+    addTab(label2, QString(tr("Main")));
+    addTab(label3, QString(tr("View")));
+    addTab(label4, QString(tr("Geometry")));
+
+    // setStyleSheet("color: blue;");
 }
