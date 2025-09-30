@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>app_ru.ts</file>
+    </qresource>
+</RCC>

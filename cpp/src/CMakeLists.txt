@@ -1,0 +1,63 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(Source_lib
+    VERSION 1.0
+    LANGUAGES CXX
+)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+
+find_package(Qt5 REQUIRED Core Gui Widgets LinguistTools)
+
+file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS
+    "*.hpp" 
+    "*.h"
+)
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
+    "*.cpp"
+)
+
+add_library(${PROJECT_NAME} SHARED ${HEADERS} ${SOURCES})
+
+set_target_properties(${PROJECT_NAME}  PROPERTIES
+    VERSION 1.0.0
+    SOVERSION 1
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+    PUBLIC_HEADER "${HEADERS}"
+)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    Qt5::Core 
+    Qt5::Gui 
+    Qt5::Widgets
+)
+
+target_include_directories(${PROJECT_NAME} 
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        $<INSTALL_INTERFACE:include>
+    PRIVATE
+        ${Qt5Widgets_INCLUDE_DIRS}
+)
+
+install(TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}Targets
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+    PUBLIC_HEADER DESTINATION include/${PROJECT_NAME}
+)
+
+install(EXPORT ${PROJECT_NAME}Targets
+    FILE ${PROJECT_NAME}Config.cmake
+    DESTINATION lib/cmake/${PROJECT_NAME}
+)
