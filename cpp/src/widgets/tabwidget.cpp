@@ -14,8 +14,6 @@ TabWidget::TabWidget(QWidget *parent) {
     QLabel *label3 = new QLabel("QLabel_3", this);
     QLabel *label4 = new QLabel("QLabel_4", this);
 
-    label1->setObjectName("label1");
-
     addTab(label1, QString(tr("File")));
     addTab(label2, QString(tr("Main")));
     addTab(label3, QString(tr("View")));
