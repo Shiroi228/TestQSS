@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/style">
         <file>style.qss</file>
+        <file>roxydoxy.qss</file>
     </qresource>
 </RCC>

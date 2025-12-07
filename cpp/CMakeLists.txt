@@ -16,9 +16,14 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
+# set(Qt5_DIR "C:/msys64/mingw64/qt6-static/lib/cmake")
+# set(Qt5_DIR "C:/msys64/mingw64/qt5-static/lib/cmake")
+set(Qt5_DIR "C:/Qt/Qt5.15.2/5.15.2/mingw81_32/lib/cmake/Qt5")
+
 find_package(Qt5 REQUIRED Core Gui Widgets LinguistTools)
 
 add_subdirectory(src)
+add_subdirectory(libs/SARibbon-1.2.0)
 
 set(SOURCES main.cpp)
 
@@ -50,6 +55,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt5::Gui
     Qt5::Widgets
     Source_lib
+    SARibbon
 )
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
